@@ -15,7 +15,7 @@ import (
 	"github.com/chaocai2001/writing_testable_program/grpc"
 )
 
-const Port = 8081
+const Port = 8088
 
 func createProcessingService() *ProcessingService {
 	processor := NewLowerCaseProcessor()
