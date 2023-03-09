@@ -44,6 +44,7 @@ func getNetListener(port uint) net.Listener {
 }
 
 func startServer(t *testing.T) {
+	// endPointImpl := NewGRPC_Endpoint(createProcessingService())
 	endPointImpl := NewGRPC_Endpoint(createProcessingServiceWithDecorator())
 	gRPCServer := ggrpc.NewServer()
 	grpc.RegisterProcessingServiceServer(gRPCServer, endPointImpl)

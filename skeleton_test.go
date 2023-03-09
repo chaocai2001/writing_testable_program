@@ -12,24 +12,39 @@ func (mtc *MockTokenCreator) CreateToken(data string) string {
 	return strings.ToUpper(data)
 }
 
+type testCase struct {
+	input  string
+	expect string
+}
+
 func TestBasicLogic(t *testing.T) {
-	sample := "Hello World"
+	testcases := []testCase{
+		testCase{
+			"Hello World", "hello world",
+		},
+		testCase{
+			"Hello World1", "hello world1",
+		},
+	}
+
 	processor := NewLowerCaseProcessor()
 	tokenCreator := &MockTokenCreator{}
 	storage := NewLocalMapStore()
 	processingService := NewProcessingService(processor, tokenCreator, storage)
-	token, err := processingService.Process(sample)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	retivedData, err1 := processingService.Retrive(token)
-	if err1 != nil {
-		t.Error(err)
-		return
-	}
-	if retivedData != "hello world" {
-		t.Errorf("the expected value is 'hello world', but the actual value is %s", retivedData)
-		return
+	for _, testcase := range testcases {
+		token, err := processingService.Process(testcase.input)
+		if err != nil {
+			t.Error(err)
+			return
+		}
+		retivedData, err1 := processingService.Retrive(token)
+		if err1 != nil {
+			t.Error(err)
+			return
+		}
+		if retivedData != testcase.expect {
+			t.Errorf("the expected value is 'hello world', but the actual value is %s", retivedData)
+			return
+		}
 	}
 }

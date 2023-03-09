@@ -98,7 +98,7 @@ func TestHappyScenario(t *testing.T) {
 				}
 				data := reply.GetData()
 				Convey("Then get the processed data", func() {
-					So(data, ShouldEqual, "hello world")
+					So(data, ShouldEqual, "hello world1")
 				})
 			})
 		})

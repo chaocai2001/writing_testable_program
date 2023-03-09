@@ -27,3 +27,15 @@ func (ptd *ProcessorTimerDecorator) Process(raw string) (string, error) {
 	log.Printf("[info] the time spent %d ms", duration)
 	return ret, err
 }
+
+// Decorator pattern can be implemented by functional programming
+type FN func(data string) (string, error)
+
+func DecoratorFn(f FN) FN {
+	return func(data string) (string, error) {
+		log.Printf("invoke by %s", data)
+		ret, err := f(data)
+		log.Printf("return with %s, %v", ret, err)
+		return ret, err
+	}
+}
