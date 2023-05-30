@@ -17,14 +17,14 @@ import (
 
 const Port = 8088
 
-func createProcessingService() *ProcessingService {
+func createProcessingService() ProcessingService {
 	processor := NewLowerCaseProcessor()
 	tokenCreator := &MockTokenCreator{}
 	storage := NewLocalMapStore()
 	return NewProcessingService(processor, tokenCreator, storage)
 }
 
-func createProcessingServiceWithDecorator() *ProcessingService {
+func createProcessingServiceWithDecorator() ProcessingService {
 	processor := &ProcessorLogDecorator{
 		&ProcessorTimerDecorator{NewLowerCaseProcessor()},
 	}
@@ -85,3 +85,5 @@ func TestBasicEndpoint(t *testing.T) {
 	runClient(t)
 	time.Sleep(time.Second * 1)
 }
+
+// write a test for reply.GetToken

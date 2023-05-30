@@ -8,10 +8,10 @@ import (
 
 type GRPC_Endpoint struct {
 	grpc.UnimplementedProcessingServiceServer
-	processingService *ProcessingService
+	processingService ProcessingService
 }
 
-func NewGRPC_Endpoint(processingService *ProcessingService) *GRPC_Endpoint {
+func NewGRPC_Endpoint(processingService ProcessingService) *GRPC_Endpoint {
 	return &GRPC_Endpoint{
 		processingService: processingService,
 	}

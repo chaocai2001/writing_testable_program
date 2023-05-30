@@ -21,22 +21,27 @@ type TokenCreator interface {
 	CreateToken(data string) string
 }
 
-type ProcessingService struct {
+type ProcessingService interface {
+	Process(raw string) (string, error)
+	Retrive(token string) (string, error)
+}
+
+type ProcessingServiceImpl struct {
 	Storage      Storage
 	Processor    Processor
 	TokenCreator TokenCreator
 }
 
 func NewProcessingService(processor Processor,
-	tokenCreator TokenCreator, storage Storage) *ProcessingService {
-	return &ProcessingService{
+	tokenCreator TokenCreator, storage Storage) ProcessingService {
+	return &ProcessingServiceImpl{
 		Storage:      storage,
 		Processor:    processor,
 		TokenCreator: tokenCreator,
 	}
 }
 
-func (ps *ProcessingService) Process(raw string) (string, error) {
+func (ps *ProcessingServiceImpl) Process(raw string) (string, error) {
 	processed, err := ps.Processor.Process(raw)
 	if err != nil {
 		return "", err
@@ -46,6 +51,6 @@ func (ps *ProcessingService) Process(raw string) (string, error) {
 	return token, err1
 }
 
-func (ps *ProcessingService) Retrive(token string) (string, error) {
+func (ps *ProcessingServiceImpl) Retrive(token string) (string, error) {
 	return ps.Storage.RetiveData(token)
 }
