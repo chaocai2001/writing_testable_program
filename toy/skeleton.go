@@ -7,7 +7,10 @@ type Storage interface {
 	// RetiveData is to retrive the data by the associated token.
 	RetiveData(token string) (string, error)
 
-	// StoreData is to persist the data
+	// StoreData is to persist the data,
+	// input paramters:
+	//   token is used to retrive the associated data
+	//
 	StoreData(token string, data string) error
 }
 

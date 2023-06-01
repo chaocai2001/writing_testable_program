@@ -1,16 +1,16 @@
 package toy
 
 import (
-	//	"strings"
+	"strings"
 	"testing"
 )
 
-// type MockTokenCreator struct {
-// }
+type MockTokenCreator struct {
+}
 
-// func (mtc *MockTokenCreator) CreateToken(data string) string {
-// 	return strings.ToUpper(data)
-// }
+func (mtc *MockTokenCreator) CreateToken(data string) string {
+	return strings.ToUpper(data)
+}
 
 type testCase struct {
 	input  string
