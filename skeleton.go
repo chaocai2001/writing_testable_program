@@ -22,7 +22,12 @@ type TokenCreator interface {
 }
 
 type ProcessingService interface {
+	// Process is to process input string and persist the result.
+	// And a token will be returned which can be used for retriving the processed result
 	Process(raw string) (string, error)
+
+	// Retrive is to retrive the processed result by given token,
+	// which is returned by "Process" method.
 	Retrive(token string) (string, error)
 }
 
